@@ -1,4 +1,4 @@
 # ihsansoft
 Code4everyone
 
-Here are some projects 've worked on myself.
+Here are some projects I've worked on myself.
