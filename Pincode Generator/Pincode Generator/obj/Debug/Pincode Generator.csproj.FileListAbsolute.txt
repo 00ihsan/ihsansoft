@@ -1,0 +1,10 @@
+C:\Users\ihsan\projects\ihsansoft\Pincode Generator\Pincode Generator\bin\Debug\Pincode Generator.exe.config
+C:\Users\ihsan\projects\ihsansoft\Pincode Generator\Pincode Generator\bin\Debug\Pincode Generator.exe
+C:\Users\ihsan\projects\ihsansoft\Pincode Generator\Pincode Generator\bin\Debug\Pincode Generator.pdb
+C:\Users\ihsan\projects\ihsansoft\Pincode Generator\Pincode Generator\obj\Debug\Pincode Generator.csprojAssemblyReference.cache
+C:\Users\ihsan\projects\ihsansoft\Pincode Generator\Pincode Generator\obj\Debug\Pincode_Generator.Form1.resources
+C:\Users\ihsan\projects\ihsansoft\Pincode Generator\Pincode Generator\obj\Debug\Pincode_Generator.Properties.Resources.resources
+C:\Users\ihsan\projects\ihsansoft\Pincode Generator\Pincode Generator\obj\Debug\Pincode Generator.csproj.GenerateResource.cache
+C:\Users\ihsan\projects\ihsansoft\Pincode Generator\Pincode Generator\obj\Debug\Pincode Generator.csproj.CoreCompileInputs.cache
+C:\Users\ihsan\projects\ihsansoft\Pincode Generator\Pincode Generator\obj\Debug\Pincode Generator.exe
+C:\Users\ihsan\projects\ihsansoft\Pincode Generator\Pincode Generator\obj\Debug\Pincode Generator.pdb
