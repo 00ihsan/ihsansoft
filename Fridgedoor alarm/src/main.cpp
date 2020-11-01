@@ -1,9 +1,9 @@
 #include <Arduino.h>
 
 int lastLedMillis;
-bool ledState;
 #define intervalLed  1000
 
+#define LEDpin B00100000 //pin 13
 #define buzzerPin A0
 #define doorPin 11
 #define overridePin 7
@@ -69,8 +69,8 @@ void DoorOpened()
           tone(buzzerPin, frequencyOpened, soundTimeOpened);
         }
         
-        digitalWrite(greenStatusLed, LOW);
-        digitalWrite(redStatusLed, HIGH);
+        PORTB &= ~B00000001;
+        PORTD |=  B00000100;
         lastMillis = millis();
       }
     }
@@ -82,8 +82,8 @@ void DoorClosed()
   lastMillisOpened = millis();
   noTone(buzzerPin);
   overrideState = false;
-  digitalWrite(redStatusLed, LOW);
-  digitalWrite(greenStatusLed, HIGH);
+  PORTD &= ~B00000100;
+  PORTB |=  B00000001;
   count = 0;  
 }
 
@@ -91,15 +91,14 @@ void setup()
 {
   count = 0;
   lastLedMillis = 0;
-  ledState = false;
   overrideState = false;
   Serial.begin(9600);
-  pinMode(buzzerPin, OUTPUT);
-  pinMode(greenStatusLed, OUTPUT);
-  pinMode(redStatusLed, OUTPUT);
-  pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(doorPin, INPUT);
-  pinMode(overridePin, INPUT);
+  //Select pin mode with DDR
+  DDRB |= B10101001; //green LED and build in led and door and override
+  DDRD |= B00000100; //red LED
+  DDRC |= B00000001; //set buzzer
+
+
   tone(buzzerPin, 15000, 1000);
   Serial.println("Setup Complete!");
   lastLedMillis = millis();
@@ -110,32 +109,25 @@ void loop()
 {
   if (millis() - lastLedMillis > intervalLed)
   {
-    if (!ledState)
-    {
-      digitalWrite(LED_BUILTIN, HIGH);
-      ledState = true;
-    }
-    else if (ledState)
-    {
-      digitalWrite(LED_BUILTIN, LOW);
-      ledState = false;
-    }
+    PORTB ^= LEDpin;
     lastLedMillis = millis();
   }
+  
+  int overrideStatus = (PIND & B10000000) >> 7;
+  int doorStatus = (PINB & B00001000) >> 3;
 
-
-  if (digitalRead(overridePin))
+  if (overrideStatus)
   {
     Serial.println("Override!");
     overrideState = true;
     noTone(buzzerPin);
   }
-  else if (digitalRead(doorPin))
+  else if (doorStatus)
   {
     Serial.println("Door Opened!");
     DoorOpened();
   }
-  else if (!digitalRead(doorPin))
+  else if (!doorStatus)
   {
     Serial.println("Door Closed!");
     DoorClosed();
